@@ -1,0 +1,24 @@
+Newsgroups: comp.sources.postscript
+Subject: v03i067: hexpaper - Hexagonal grid, Clip Art, Part01/01
+Summary: Hexagonal paper
+Date: Tue, 8 Nov 1994 16:46:03 GMT
+Submitted-by: Dan Nygren
+Posting-number: Volume 03, Issue 67
+Archive-name: hexpaper/part01
+Environment: PostScript
+Keywords: hexagon, hex paper, mapping
+
+This program prints out hexagon mapping paper on a PostScript printer.
+The size of the hexes is adjustable via the side_size variable. The darkness
+of the lines can be changed with the setgray operator and the line thickness
+can also be altered with the setlinewidth operator.
+
+Hexagon mapping paper can be printed on any PostScript printer by sending the
+file hexpaper.ps directly to the printer after optionally making any desired
+changes.  Those without access to a PostScript printer can use Ghostscript /
+ps2pdf to convert to Portable Document Format (PDF) and then print the PDF
+file. 
+
+    Dan Nygren
+
+,
