@@ -4,8 +4,8 @@
 % (comp.sources.postscript v03i067)
 %
 % by Daniel C. Nygren $Date: 2017/10/12 16:25:32 $
-% 
-% Permanent e-mail: dan.nygren@alumni.clemson.edu
+%
+% Email: dan.nygren@gmail.com
 %
 % Copyright (c) 1994, 2017, by Daniel C. Nygren. All rights reserved.
 % Permission to use and modify this software for any purpose other than
@@ -22,10 +22,10 @@
 % of the lines can be changed with the setgray command and the line thickness
 % can also be set differently with the setlinewidth operator.
 %
-%	TARGET SYSTEM:		PostScript Level 1	
+%    TARGET SYSTEM:         PostScript Level 1
 %
-%	DEVELOPMENT SYSTEM:	Windows95, Ghostscript, HP LaserJet 5MP, 
-%				Apple LaserWriter II NT
+%    DEVELOPMENT SYSTEM:    Windows95, Ghostscript, HP LaserJet 5MP,
+%                           Apple LaserWriter II NT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               REVISIONS
@@ -37,7 +37,7 @@
 % Revision 1.1  1998/09/23 17:38:47  NYGREN
 % Moved stroke command so it now paints each row of hexes
 % instead of waiting until the entire hex grid path is laid.
-% This change was made because some PostScript Level 1 
+% This change was made because some PostScript Level 1
 % interpreters can't handle such a complex path when the
 % side_size is less than 0.25 inches.
 %
@@ -48,37 +48,43 @@
 
 % --- Defines ---
 
-/#copies 1 def	%Enter number of copies to print out
+/#copies 1 def          % Enter number of copies to print out
 
-/side_size {0.25} def	%Enter length of a hexagon side in inches
+/side_size {0.25} def   % Enter length of a hexagon side in inches
 
 /hex_height {2 side_size mul 60 sin mul} bind def
 /hex_width {2 side_size mul 60 cos mul side_size add} bind def
 
 % Paper parameters
-/paper_width {8.5} def	%Enter paper width in inches
-/paper_height {11} def	%Enter paper height in inches
-/margin {0.25} def	%Enter paper margin in inches
+/paper_width {8.5} def  % Enter paper width in inches
+/paper_height {11} def  % Enter paper height in inches
+/margin {0.25} def      % Enter paper margin in inches
 
 % If you would rather specify your paper sizes in millimeters, comment
-% out the above three lines and uncomment the below six lines. 
-% Note ISO 216 A4 paper = 210mm x 297mm, US Letter paper = 8.5in x 11in = 215.9mm x 279.4mm
-%/paper_width_in_mm {210} def                           % Enter paper width in mm
-%/paper_width {paper_width_in_mm 25.4 div inch} def     % millimeters/25.4 = inches
-%/paper_height_in_mm {297} def                          % Enter paper height in mm
-%/paper_height {paper_height_in_mm 25.4 div inch} def	% millimeters/25.4 = inches
-%/paper_margin_in_mm {6.35} def                         % Enter paper margin in mm
-%/paper_margin {paper_margin_in_mm 25.4 div inch} def   % millimeters/25.4 = inches
+% out the above three lines and uncomment the below six lines.
+% Note ISO 216 A4 paper = 210mm x 297mm,
+% US Letter paper = 8.5in x 11in = 215.9mm x 279.4mm
+%/paper_width_in_mm {210} def   % Enter paper width in mm
+%/paper_width {paper_width_in_mm 25.4 div inch} def
+% millimeters/25.4 = inches
+%/paper_height_in_mm {297} def  % Enter paper height in mm
+%/paper_height {paper_height_in_mm 25.4 div inch} def
+% millimeters/25.4 = inches
+%/paper_margin_in_mm {6.35} def % Enter paper margin in mm
+%/paper_margin {paper_margin_in_mm 25.4 div inch} def
+% millimeters/25.4 = inches
 
 %^^^^^^^^^^^^^^ You should only have to change things above here ^^^^^^^^^^^^^^
 
 % Calculate how many hexes will fit across the paper's width
 % Subtract a hex_width from the available space because we need to
 % add one last_hex_bottom at the end of each row of hex_bottoms
-/this_many_hexes_wide {paper_width margin 2 mul sub hex_width sub hex_width side_size add div floor} bind def
+/this_many_hexes_wide {paper_width margin 2 mul sub hex_width sub hex_width
+ side_size add div floor} bind def
 
 % Calculate how many hexes will fit across the paper's height
-/this_many_hexes_high {paper_height margin 2 mul sub hex_height div floor} bind def
+/this_many_hexes_high {paper_height margin 2 mul sub hex_height div floor}
+ bind def
 
 /inch {72 mul} bind def
 
@@ -86,44 +92,44 @@
 /line {side_size inch 0 inch rlineto} def
 /no_line {side_size inch 0 inch rmoveto} def
 
-/hex_bottom {		%	 %%%%%%
-	-60 rotate	 %	%
-	line		  %%%%%%
-	60 rotate
-	line
-	60 rotate
-	line
-	-60 rotate
-	line
+/hex_bottom {       %        %%%%%%
+    -60 rotate       %      %
+    line              %%%%%%
+    60 rotate
+    line
+    60 rotate
+    line
+    -60 rotate
+    line
 } bind def
 
-/last_hex_bottom {	%	 %
-	-60 rotate	 %	%
-	line		  %%%%%%
-	60 rotate
-	line
-	60 rotate
-	line
-	-60 rotate
+/last_hex_bottom {  %        %
+    -60 rotate       %      %
+    line              %%%%%%
+    60 rotate
+    line
+    60 rotate
+    line
+    -60 rotate
 } bind def
 
-/hex_top {		  %%%%%%
-	60 rotate	 %	%
-	line		%	 %------
-	-60 rotate
-	line
-	-60 rotate
-	line
-	60 rotate
-	no_line
+/hex_top {            %%%%%%
+    60 rotate        %       %
+    line            %         %------
+    -60 rotate
+    line
+    -60 rotate
+    line
+    60 rotate
+    no_line
 } bind def
 
 % --- Start program ---
 
-newpath	%Start with a clean slate
+newpath    % Start with a clean slate
 
-0.6 setgray		%Play with this to change darkness of lines (0 = Black)
-0.2 setlinewidth	%Play with this to change line thickness
+0.6 setgray         % Play with this to change darkness of lines (0 = Black)
+0.2 setlinewidth    % Play with this to change line thickness
 
 % --- Calculate where to start printing so the hexes are centered ---
 
@@ -133,7 +139,7 @@ this_many_hexes_wide
 % Then see how much room they will take up (Don't forget the last hex bottom!)
 hex_width side_size add mul hex_width add
 
-% Then subtract from paper width and divide by two to find out where to start 
+% Then subtract from paper width and divide by two to find out where to start
 % printing. This x coordinate is left on the stack.
 paper_width exch sub 2 div inch
 
@@ -148,44 +154,44 @@ hex_height mul
 % to start printing. This y coordinate is left on the stack.
 paper_height exch sub 2 div hex_height 2 div add inch
 
-%Start printing at the calculated spot
+% Start printing at the calculated spot
 moveto
 
-%We construct the rows of hexes by printing a row of hex bottoms
-%followed by a row of hex tops. Loop counts must be integers, so 
-%cvi is used to convert the numbers to integers.
+% We construct the rows of hexes by printing a row of hex bottoms
+% followed by a row of hex tops. Loop counts must be integers, so
+% cvi is used to convert the numbers to integers.
 
 this_many_hexes_high cvi{
 
-	currentpoint	%Save currentpoint on stack twice:
-	currentpoint	%once for getting back to print the hex tops,
-			%once for returning to move up one row.
-	
-	%Make a row of hex_bottoms
-	this_many_hexes_wide cvi{
+    currentpoint    % Save currentpoint on stack twice:
+    currentpoint    % once for getting back to print the hex tops,
+                    % once for returning to move up one row.
 
-		hex_bottom
+    % Make a row of hex_bottoms
+    this_many_hexes_wide cvi{
 
-	}repeat
+        hex_bottom
 
-	last_hex_bottom	%Last hex bottom doesn't have a tail sticking out
+    }repeat
 
-	moveto	%Go back to point saved on stack to print hex tops
+    last_hex_bottom % Last hex bottom doesn't have a tail sticking out
 
-	%Make a row of hex tops
-	this_many_hexes_wide cvi{
+    moveto          % Go back to point saved on stack to print hex tops
 
-		hex_top
+    % Make a row of hex tops
+    this_many_hexes_wide cvi{
 
-	}repeat
+        hex_top
 
-	hex_top	%Last hex top to match last hex bottom
+    }repeat
 
-	stroke	%Paint the line on the current path for this row
+    hex_top         % Last hex top to match last hex bottom
 
-	moveto	%Go back to point saved on stack so we can move up to next row
+    stroke          % Paint the line on the current path for this row
 
-	0 inch hex_height inch rmoveto	%Move up to next row
+    moveto    % Go back to point saved on stack so we can move up to next row
+
+    0 inch hex_height inch rmoveto    % Move up to next row
 
 }repeat
 
